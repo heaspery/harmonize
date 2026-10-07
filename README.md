@@ -1,4 +1,6 @@
-# trouver-sa-voi-e-x
+# Trouver-sa-voi-e-x
+## Introduction
+Ce projet, en cours de développement, s'inscrit dans le cadre de l'exposition "Trouver sa voi-e-x" pour lequel je développe une installation basée sur la captation de sons et leurs visualisations. Travail en collaboration avec l'artiste Leïla Dorsaz. 
 
 ## Getting Started
 
