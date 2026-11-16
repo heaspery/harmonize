@@ -1,0 +1,22 @@
+{
+  "name": "trouver-sa-voi-e-x",
+  "version": "1.0.0",
+  "description": "Ce projet, en cours de développement, s'inscrit dans le cadre de l'exposition \"Trouver sa voi-e-x\" pour lequel je développe une installation basée sur la captation de sons et leurs visualisations. Travail en collaboration avec l'artiste Leïla Dorsaz.",
+  "main": "sketch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heaspery/harmonize.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heaspery/harmonize/issues"
+  },
+  "homepage": "https://github.com/heaspery/harmonize#readme",
+  "dependencies": {
+    "gsap": "^3.15.1"
+  }
+}
