@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  background-color: #faf9ee;
+  -webkit-text-stroke: 1px #000;
 }
 
 .Horizontal {

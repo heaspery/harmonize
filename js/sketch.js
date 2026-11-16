@@ -36,6 +36,7 @@ function animateText(index, y, start, { duration = 60 } = {}) {
       yPercent: "random(-200, 200)",
       rotation: "random(-20, 20)",
       ease: "back.out(1.2)",
+      force3D: true, // chaque lettre sur son propre calque GPU : la bouger ne redessine pas tout le texte
       paused: true
     })
   }));
