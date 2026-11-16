@@ -31,6 +31,7 @@ function animateText(index, y, start, { duration = 60 } = {}) {
   const textLeft = text.getBoundingClientRect().left;
   const chars = split.chars.map((char) => ({
     offset: char.getBoundingClientRect().left - textLeft,
+    last: -1, // dernière progression appliquée (pour ne rien recalculer si elle n'a pas changé)
     tween: gsap.from(char, {
       yPercent: "random(-200, 200)",
       rotation: "random(-20, 20)",
@@ -38,7 +39,8 @@ function animateText(index, y, start, { duration = 60 } = {}) {
       paused: true
     })
   }));
-  animatedTexts.push({ text, chars });
+  // Mesuré une seule fois : la position du texte est ensuite calculée, sans interroger le navigateur
+  animatedTexts.push({ text, chars, baseLeft: textLeft, width: text.offsetWidth });
 
   // Défilement horizontal, placé dans la scène au moment "start"
   scene.fromTo(text, { xPercent: 0 }, { xPercent: -100, ease: "none", duration }, start);
@@ -47,10 +49,16 @@ function animateText(index, y, start, { duration = 60 } = {}) {
 // À chaque image : chaque lettre se met en place entre 100% et 30% de la largeur de l'écran
 gsap.ticker.add(() => {
   const vw = window.innerWidth;
-  animatedTexts.forEach(({ text, chars }) => {
-    const left = text.getBoundingClientRect().left;
-    chars.forEach(({ offset, tween }) => {
-      tween.progress(gsap.utils.clamp(0, 1, (vw - (left + offset)) / (vw * 0.7)));
+  animatedTexts.forEach(({ text, chars, baseLeft, width }) => {
+    // Position actuelle du texte, calculée à partir de son décalage (xPercent) : aucune lecture du DOM
+    const left = baseLeft + (gsap.getProperty(text, "xPercent") / 100) * width;
+    chars.forEach((c) => {
+      const p = gsap.utils.clamp(0, 1, (vw - (left + c.offset)) / (vw * 0.7));
+      if (p !== c.last) {
+        // on ne touche la lettre que si elle bouge (hors écran ou déjà en place → rien à faire)
+        c.last = p;
+        c.tween.progress(p);
+      }
     });
   });
 });

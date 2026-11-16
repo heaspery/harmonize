@@ -19,6 +19,7 @@ body {
   white-space: nowrap;
   gap: 4vw;
   padding-left: 100vw; /* le texte démarre hors de l'écran, à droite */
+  will-change: transform; /* le déplacement est confié à la carte graphique */
 }
 
 .heading-xl {
